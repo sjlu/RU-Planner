@@ -7,7 +7,7 @@
         		<span class="icon-bar"></span>
       		</a>
 
-	      	<a class="brand" href="#">RU Planner</a>
+	      	<a class="brand" href="<?= site_url('/') ?>">RU Planner</a>
 
 			<div class="nav-collapse collapse">
 		      	<ul class="nav pull-right">
