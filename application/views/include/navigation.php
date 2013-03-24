@@ -11,7 +11,7 @@
 
 			<div class="nav-collapse collapse">
 		      	<ul class="nav pull-right">
-					<li><a href="#"><i class="icon-signin"></i> Login</a></li>
+					<li><a href="<?= site_url('login') ?>"><i class="icon-signin"></i> Login</a></li>
 				</ul>
 			</div>
 		</div>
