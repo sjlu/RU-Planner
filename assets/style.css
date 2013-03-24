@@ -10386,3 +10386,27 @@ ul.icons li [class*=" icon-"] {
 /**
  * Imports your own custom CSS.
  */
+
+#frontpage .hero-unit {
+  padding: 40px 60px;
+}
+
+#frontpage .hero-unit i {
+  font-size: 66px;
+}
+
+#frontpage .hero-unit .span2 {
+  text-align: center;
+}
+
+#frontpage #details i {
+  font-size: 33px;
+}
+
+#frontpage #details .span1 {
+  text-align: center;
+}
+
+#frontpage #about {
+  margin-top: 40px;
+}

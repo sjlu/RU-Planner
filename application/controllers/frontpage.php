@@ -7,6 +7,7 @@ class Frontpage extends CI_Controller
 	{
 		$this->load->view('include/header');
 		$this->load->view('include/navigation');
+		$this->load->view('frontpage');
 		$this->load->view('include/footer');
 	}
 
