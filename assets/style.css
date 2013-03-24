@@ -3036,7 +3036,7 @@ table th[class*="span"],
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../import/twitter-bootstrap/img/glyphicons-halflings.png");
+  background-image: url("import/twitter-bootstrap/img/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   margin-top: 1px;
@@ -3061,7 +3061,7 @@ table th[class*="span"],
 .dropdown-submenu:focus > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"],
 .dropdown-submenu:focus > a > [class*=" icon-"] {
-  background-image: url("../import/twitter-bootstrap/img/glyphicons-halflings-white.png");
+  background-image: url("import/twitter-bootstrap/img/glyphicons-halflings-white.png");
 }
 
 .icon-glass {
@@ -9072,8 +9072,8 @@ a.badge:focus {
 
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../font/fontawesome-webfont.eot?v=3.0.1');
-  src: url('../font/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'), url('../font/fontawesome-webfont.woff?v=3.0.1') format('woff'), url('../font/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
+  src: url('import/font-awesome/font/fontawesome-webfont.eot?v=3.0.1');
+  src: url('import/font-awesome/font/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'), url('import/font-awesome/font/fontawesome-webfont.woff?v=3.0.1') format('woff'), url('import/font-awesome/font/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

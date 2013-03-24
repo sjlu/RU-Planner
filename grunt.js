@@ -31,28 +31,41 @@ module.exports = function(grunt) {
 			coffee: [
 				'assets/coffee/*.coffee'
 			],
-			html: [
-				'*.html'
+			js: [
+				'assets/import/twitter-bootstrap/js/bootstrap-affix.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-alert.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-button.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-carousel.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-collapse.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-dropdown.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-modal.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-tooltip.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-popover.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-scrollspy.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-tab.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-transition.js',
+				'assets/import/twitter-bootstrap/js/bootstrap-typeahead.js',
+				'assets/js/*.js'
 			]
 		},
         coffee: {
             app: {
-                    src: '<config:files.coffee>',
-                    dest: 'assets/js',
-                    options: {
-                            bare: true
-                    }
+                src: '<config:files.coffee>',
+                dest: 'assets/js',
+                options: {
+                    bare: true
+                }
             }
         },
 		concat: {
 			js: {
-				src: 'assets/js/*.js',
+				src: '<config:files.js>',
 				dest: 'assets/app.js'
 			}
 		},
 		min: {
 			js: {
-				src: 'assets/js/*.js',
+				src: '<config:files.js>',
 				dest: 'assets/app.js'
 			}
 		},
@@ -69,20 +82,12 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
-			img: {
-				files: ['assets/img/*'],
-				tasks: 'coffee concat recess:max'
-			},
 			less: {
 				files: ['assets/less/*.less', 'assets/less/**/*.less'],
 				tasks: 'coffee concat recess:max'
 			},
 			coffee: {
 				files: '<config:files.coffee>',
-				tasks: 'coffee concat recess:max'
-			},
-			html: {
-				files: '<config:files.html>',
 				tasks: 'coffee concat recess:max'
 			}
 		},
