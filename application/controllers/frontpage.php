@@ -1,6 +1,6 @@
 <?php
 
-class Welcome extends CI_Controller
+class Frontpage extends CI_Controller
 {
 
    function index()
