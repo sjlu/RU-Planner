@@ -14,7 +14,11 @@ class Login extends CI_Controller
 			if (!$this->auth->verify($this->input->post('username'), $this->input->post('password')))
 				$this->load->view('login', array('error' => 'Authentication failed.'));
 			else
+			{
+				$this->load->library('session');
+				$this->session->set_userdata('user', $this->input->post('username'));
 				return redirect('/home', 'refresh');
+			}
 		}
 		else
 			$this->load->view('login', array('info' => 'Please login.'));

@@ -11,7 +11,11 @@
 
 			<div class="nav-collapse collapse">
 		      	<ul class="nav pull-right">
-					<li><a href="<?= site_url('login') ?>"><i class="icon-signin"></i> Login</a></li>
+		      		<? if (!is_logged_in()): ?>
+						<li><a href="<?= site_url('login') ?>"><i class="icon-signin"></i> Login</a></li>
+					<? else: ?>
+						<li><a href="<?= site_url('logout') ?>"><i class="icon-signout"></i> Logout</a></li>
+					<? endif; ?>
 				</ul>
 			</div>
 		</div>

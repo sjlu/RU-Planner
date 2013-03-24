@@ -7,7 +7,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="details" class="row">
+	<div class="details row">
 		<div class="offset1 span5">
 			<div class="row">
 				<div class="span1">
@@ -25,6 +25,28 @@
 				</div>
 				<div class="span4">
 					Communicate with peers about your degree path and see if you're on track.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="details row">
+		<div class="offset1 span5">
+			<div class="row">
+				<div class="span1">
+					<i class="icon-thumbs-up"></i>
+				</div>
+				<div class="span4">
+					Plan your schedule based on course difficulty and not the number of credits.
+				</div>
+			</div>
+		</div>
+		<div class="span5">
+			<div class="row">
+				<div class="span1">
+					<i class="icon-check"></i>
+				</div>
+				<div class="span4">
+					Remove the stress of scheduling by tracing you're entire school career, all in one place.
 				</div>
 			</div>
 		</div>

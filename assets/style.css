@@ -10399,11 +10399,15 @@ ul.icons li [class*=" icon-"] {
   text-align: center;
 }
 
-#frontpage #details i {
+#frontpage .details {
+  margin-bottom: 20px;
+}
+
+#frontpage .details i {
   font-size: 33px;
 }
 
-#frontpage #details .span1 {
+#frontpage .details .span1 {
   text-align: center;
 }
 
