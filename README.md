@@ -1,3 +1,3 @@
 # RU Planner
 
-More details and entries can be found at http://capstone.stevenlu.com
+Details about this project can be found on our [Wiki](https://github.com/sjlu/RU-Planner/wiki).
