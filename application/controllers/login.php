@@ -7,7 +7,18 @@ class Login extends CI_Controller
 	{
 		$this->load->view('include/header');
 		$this->load->view('include/navigation');
-		$this->load->view('login');
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+		{
+			$this->load->model('auth_model', 'auth');
+			if (!$this->auth->verify($this->input->post('username'), $this->input->post('password')))
+				$this->load->view('login', array('error' => 'Authentication failed.'));
+			else
+				return redirect('/home', 'refresh');
+		}
+		else
+			$this->load->view('login', array('info' => 'Please login.'));
+		
 		$this->load->view('include/footer');
 	}
 
