@@ -51,7 +51,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="about" class="row well">
+	<div id="about" class="well">
 		<div class="pull-left">
 			A Spring 2013 Capstone Project
 		</div>
