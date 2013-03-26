@@ -10,10 +10,6 @@ class Main_Controller extends MY_Controller
 
 		if (!$this->_user())
 			redirect('login', 'refresh');
-
-		$this->load->library('migration');
-		if (!$this->migration->current())
-		   show_error($this->migration->error_string());
 	}
 
 	function _user()

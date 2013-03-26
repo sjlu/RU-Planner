@@ -9,7 +9,7 @@ class Home extends Main_Controller
 		$this->load->view('include/navigation');
 
 		$this->load->model('user_model', 'users');
-		$user = $this->users->get($this->_user());
+		$user = $this->users->get_user($this->_user());
 
 		if (empty($user->major))
 		{
@@ -20,7 +20,7 @@ class Home extends Main_Controller
 		}
 		else
 			$this->load->view('home');
-		
+
 		$this->load->view('include/footer');
    }
 
