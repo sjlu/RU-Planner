@@ -10926,3 +10926,7 @@ ul.icons li [class*=" icon-"] {
 #frontpage #about {
   margin-top: 40px;
 }
+
+body {
+  padding: 15px;
+}
