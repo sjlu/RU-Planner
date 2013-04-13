@@ -10927,6 +10927,14 @@ ul.icons li [class*=" icon-"] {
   margin-top: 40px;
 }
 
+#select-major {
+  text-align: center;
+}
+
+#select-major .btn {
+  margin-left: 10px;
+}
+
 body {
   padding: 15px;
 }

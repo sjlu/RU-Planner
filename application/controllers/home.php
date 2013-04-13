@@ -3,8 +3,8 @@
 class Home extends Main_Controller 
 {
 
-   function index()
-   {
+	function index()
+	{
 		$this->load->view('include/header');
 		$this->load->view('include/navigation');
 
@@ -22,6 +22,23 @@ class Home extends Main_Controller
 			$this->load->view('home');
 
 		$this->load->view('include/footer');
-   }
+	}
+
+	function choose_major()
+	{
+		$major = $this->input->post('major');
+		if (empty($major))
+			redirect('home/index', 'refresh');
+			
+		$this->load->model('major_model', 'majors');
+
+		if (!$this->majors->get_one($major))
+			redirect('home/index', 'refresh');
+
+		$this->load->model('user_model', 'users');
+
+		$this->users->set_major($this->_user(), $major);
+		redirect('home/index', 'refresh');	
+	}
 
 }
