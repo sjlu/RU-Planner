@@ -26,6 +26,10 @@ class Migration_courses extends CI_Migration
 			),
 			'description' => array(
 				'type' => 'TEXT'
+			),
+			'credits' => array(
+				'type' => 'INT',
+				'constraint' => 3
 			)
 		);
 
