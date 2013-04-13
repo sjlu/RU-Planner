@@ -118,5 +118,11 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+if (ENVIRONMENT == 'production')
+{
+    $db['default']['username'] = 'ru-planner';
+    $db['default']['password'] = 'P2LKANdG6wZbshQK';
+}
+
 /* End of file database.php */
 /* Location: ./application/config/database.php */
