@@ -3,6 +3,12 @@
 class Major_model extends CI_Model
 {
 
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->database();
+	}
+
 	function get()
 	{
 		$query = $this->db->get('majors');
@@ -18,6 +24,16 @@ class Major_model extends CI_Model
 			return FALSE;
 
 		return $query->row();
+	}
+
+	function get_courses($id)
+	{
+		$this->db->where('major_id', $id)
+			->join('courses', 'major_courses.course_id = courses.id');
+
+		$query = $this->db->get('major_courses');
+
+		return $query->result();
 	}
 
 }

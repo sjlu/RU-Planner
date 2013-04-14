@@ -11,15 +11,21 @@ class Home extends Main_Controller
 		$this->load->model('user_model', 'users');
 		$user = $this->users->get_user($this->_user());
 
+		$this->load->model('major_model', 'majors');
 		if (empty($user->major))
 		{
-			$this->load->model('major_model', 'majors');
 			$majors = $this->majors->get();
-
-			$this->load->view('majors', array('majors' => $majors));
+			$this->load->view('majors', array(
+				'majors' => $majors
+			));
 		}
 		else
-			$this->load->view('home');
+		{
+			$major_courses = $this->majors->get_courses($user->major);
+			$this->load->view('home', array(
+				'major_courses' => $major_courses
+			));	
+		}
 
 		$this->load->view('include/footer');
 	}

@@ -38,4 +38,14 @@ class User_model extends CI_Model {
 		$this->db->update('users');
 	}
 	
+	function get_courses($user)
+	{
+		$user = $this->get_user($user);
+
+		$this->db->where('user_id', $user->id)
+			->join('courses', 'user_courses.course_id = course.id');
+
+		$query = $this->db->get('user_courses');
+	}
+
 }
