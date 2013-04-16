@@ -24,7 +24,7 @@
 			</thead>
 			<tbody>
 				<? foreach($major_courses as $course): ?>
-					<tr class="<? if(isset($course->completed)): ?>success<? endif; ?>">
+					<tr class="<? if(isset($course->completed)): ?>success<? elseif (isset($course->can_take)): ?>info<? endif; ?>">
 						<td><?= $course->school ?>:<?= $course->course ?></td>
 						<td>
 							<span class="course"

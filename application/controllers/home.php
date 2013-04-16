@@ -24,20 +24,40 @@ class Home extends Main_Controller
 			$major_courses = $this->majors->get_courses($user->major);
 			$user_courses = $this->users->get_courses($user->id);
 
+
+			$courses_taken = array();
+			foreach ($user_courses as $uc)
+				$courses_taken[$uc->course_id] = true;
+
+			$course_ids = array();
+			$all_courses = array();
 			foreach ($major_courses as &$mc)
 			{
-				foreach ($user_courses as $uc)
+				if (isset($courses_taken[$mc->course_id]))
+					$mc->completed = true;
+
+				$course_ids[] = $mc->course_id;
+				$all_courses[$mc->course_id] = $mc;
+			}
+
+			$this->load->model('course_model', 'courses');
+			$coreqs = $this->courses->get_prereqs($course_ids);
+
+			foreach ($coreqs as $course_id => $course)
+			{
+				$req = 0;
+				foreach ($course as $prereq)
 				{
-					if ($mc->course_id == $uc->course_id)
-					{
-						$mc->completed = true;
-						break;
-					}
+					if (isset($courses_taken[$prereq]))
+						$req++;
 				}
+
+				if ($req == count($course))
+					$all_courses[$course_id]->can_take = true;
 			}
 
 			$this->load->view('home', array(
-				'major_courses' => $major_courses,
+				'major_courses' => $all_courses,
 				'major_credits' => $this->majors->credits($user->major),
 				'user_credits' => $this->users->credits($user->id)
 			));	
