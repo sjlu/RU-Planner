@@ -22,8 +22,24 @@ class Home extends Main_Controller
 		else
 		{
 			$major_courses = $this->majors->get_courses($user->major);
+			$user_courses = $this->users->get_courses($user->id);
+
+			foreach ($major_courses as &$mc)
+			{
+				foreach ($user_courses as $uc)
+				{
+					if ($mc->course_id == $uc->course_id)
+					{
+						$mc->completed = true;
+						break;
+					}
+				}
+			}
+
 			$this->load->view('home', array(
-				'major_courses' => $major_courses
+				'major_courses' => $major_courses,
+				'major_credits' => $this->majors->credits($user->major),
+				'user_credits' => $this->users->credits($user->id)
 			));	
 		}
 
@@ -45,6 +61,24 @@ class Home extends Main_Controller
 
 		$this->users->set_major($this->_user(), $major);
 		redirect('home/index', 'refresh');	
+	}
+
+	function complete_course($id)
+	{
+		$this->load->model('user_model', 'users');
+		$user = $this->users->get_user($this->_user());
+
+		$this->users->add_course($user->id, $id);
+		redirect('home', 'refresh');
+	}
+
+	function remove_course($id)
+	{
+		$this->load->model('user_model', 'users');
+		$user = $this->users->get_user($this->_user());
+
+		$this->users->remove_course($user->id, $id);
+		redirect('home', 'refresh');
 	}
 
 }

@@ -36,4 +36,13 @@ class Major_model extends CI_Model
 		return $query->result();
 	}
 
+	function credits($id)
+	{
+		$credits = 0;
+		foreach ($this->get_courses($id) as $course)
+			$credits += $course->credits;
+
+		return $credits;
+	}
+
 }

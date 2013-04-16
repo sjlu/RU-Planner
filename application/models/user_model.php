@@ -40,12 +40,39 @@ class User_model extends CI_Model {
 	
 	function get_courses($user)
 	{
-		$user = $this->get_user($user);
-
-		$this->db->where('user_id', $user->id)
-			->join('courses', 'user_courses.course_id = course.id');
+		$this->db->where('user_id', $user)
+			->join('courses', 'user_courses.course_id = courses.id');
 
 		$query = $this->db->get('user_courses');
+
+		return $query->result();
+	}
+
+	function add_course($user, $course_id)
+	{
+		$row = array(
+			'user_id' => $user,
+			'course_id' => $course_id
+		);
+
+		$this->db->insert('user_courses', $row);
+	}
+
+	function remove_course($user, $course_id)
+	{
+		$this->db->where('user_id', $user)
+			->where('course_id', $course_id);
+
+		$this->db->delete('user_courses');
+	}
+
+	function credits($user)
+	{
+		$credits = 0;
+		foreach ($this->get_courses($user) as $course)
+			$credits += $course->credits;
+
+		return $credits;
 	}
 
 }
