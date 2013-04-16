@@ -24,7 +24,6 @@ class Home extends Main_Controller
 			$major_courses = $this->majors->get_courses($user->major);
 			$user_courses = $this->users->get_courses($user->id);
 
-
 			$courses_taken = array();
 			foreach ($user_courses as $uc)
 				$courses_taken[$uc->course_id] = true;
@@ -44,17 +43,9 @@ class Home extends Main_Controller
 			$coreqs = $this->courses->get_prereqs($course_ids);
 
 			foreach ($coreqs as $course_id => $course)
-			{
-				$req = 0;
 				foreach ($course as $prereq)
-				{
-					if (isset($courses_taken[$prereq]))
-						$req++;
-				}
-
-				if ($req == count($course))
-					$all_courses[$course_id]->can_take = true;
-			}
+					if (!isset($courses_taken[$prereq]))
+						$all_courses[$course_id]->cannot_take = true;
 
 			$this->load->view('home', array(
 				'major_courses' => $all_courses,

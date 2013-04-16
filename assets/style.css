@@ -10935,6 +10935,10 @@ ul.icons li [class*=" icon-"] {
   margin-left: 10px;
 }
 
+.popover-content {
+  color: #000;
+}
+
 body {
   padding: 15px;
 }

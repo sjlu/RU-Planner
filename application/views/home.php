@@ -24,7 +24,7 @@
 			</thead>
 			<tbody>
 				<? foreach($major_courses as $course): ?>
-					<tr class="<? if(isset($course->completed)): ?>success<? elseif (isset($course->can_take)): ?>info<? endif; ?>">
+					<tr class="<? if(isset($course->completed)): ?>success<? elseif (!isset($course->cannot_take)): ?>info<? endif; ?>">
 						<td><?= $course->school ?>:<?= $course->course ?></td>
 						<td>
 							<span class="course"
@@ -34,18 +34,20 @@
 							</span>
 						</td>
 						<td>
-							<? if(isset($course->completed)): ?>
-								<a class="btn btn-danger"
-									href="<?= site_url('home/remove_course/' . $course->id) ?>">
-									<i class="icon-remove-sign"></i>
-								</a>
-							<? else: ?>
-								<a class="btn btn-success"
-									href="<?= site_url('home/complete_course/' . $course->id) ?>">
-									<i class="icon-ok-sign"></i>
-								</a>
-							<? endif; ?>
-							<button class="btn btn-warning"><i class="icon-table"></i></button>
+							<center>
+								<? if(isset($course->completed)): ?>
+									<a class="btn btn-danger"
+										href="<?= site_url('home/remove_course/' . $course->id) ?>">
+										<i class="icon-remove-sign"></i>
+									</a>
+								<? else: ?>
+									<a class="btn btn-success"
+										href="<?= site_url('home/complete_course/' . $course->id) ?>">
+										<i class="icon-ok-sign"></i>
+									</a>
+								<? endif; ?>
+								<!-- <button class="btn btn-warning"><i class="icon-table"></i></button> -->
+							</center>
 						</td>
 					</tr>
 				<? endforeach; ?>
@@ -55,7 +57,7 @@
 </div>
 <script type="text/javascript">
 	$('.course').popover({
-		trigger: 'hover',
+		trigger: 'click',
 		placement: 'top'
 	});
 </script>
