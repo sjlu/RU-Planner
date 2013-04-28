@@ -47,8 +47,31 @@ class Home extends Main_Controller
 					if (!isset($courses_taken[$prereq]))
 						$all_courses[$course_id]->cannot_take = true;
 
+			$grouped_courses = array(
+				'can_take' => array(),
+				'cannot_take' => array(),
+				'completed' => array(),
+			);
+
+			foreach ($all_courses as $course)
+			{
+				if (isset($course->completed) && $course->completed)
+					$grouped_courses['completed'][] = $course;
+				else if (isset($course->cannot_take) && $course->cannot_take)
+					$grouped_courses['cannot_take'][] = $course;
+				else
+					$grouped_courses['can_take'][] = $course;
+			}
+
+			$returned_courses = array();
+			foreach ($grouped_courses as $key => $courses)
+			{
+				foreach ($courses as $course)
+					$returned_courses[] = $course;
+			}
+
 			$this->load->view('home', array(
-				'major_courses' => $all_courses,
+				'major_courses' => $returned_courses,
 				'major_credits' => $this->majors->credits($user->major),
 				'user_credits' => $this->users->credits($user->id)
 			));	

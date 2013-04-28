@@ -75,4 +75,10 @@ class User_model extends CI_Model {
 		return $credits;
 	}
 
+	function clear_courses($user)
+	{
+		$this->db->where('user_id', $user);
+		$this->db->delete('user_courses');
+	}
+
 }

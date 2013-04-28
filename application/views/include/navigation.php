@@ -10,6 +10,13 @@
 	      	<a class="brand" href="<?= site_url('/') ?>">RU Planner</a>
 
 			<div class="nav-collapse collapse">
+				<ul class="nav pull-left">
+					<? if (is_logged_in()): ?>
+						<li><a href="<?= site_url('home') ?>">Schedule</a></li>
+						<li><a href="<?= site_url('settings') ?>">Settings</a></li>
+					<? endif; ?>
+				</ul>
+
 		      	<ul class="nav pull-right">
 		      		<? if (!is_logged_in()): ?>
 						<li><a href="<?= site_url('login') ?>"><i class="icon-signin"></i> Login</a></li>

@@ -40,7 +40,7 @@
 										href="<?= site_url('home/remove_course/' . $course->id) ?>">
 										<i class="icon-remove-sign"></i>
 									</a>
-								<? else: ?>
+								<? elseif (!isset($course->cannot_take)): ?>
 									<a class="btn btn-success"
 										href="<?= site_url('home/complete_course/' . $course->id) ?>">
 										<i class="icon-ok-sign"></i>
