@@ -30,7 +30,7 @@
 			</thead>
 			<tbody>
 				<? foreach($courses as $course): ?>
-					<tr <? if (!($taken_300 >= 2 && $taken_100 >= 2)): ?>class="<? if(isset($course->completed)): ?>success<? elseif (!isset($course->cannot_take)): ?>info<? endif; ?>"<? endif; ?>>
+					<tr class="<? if(isset($course->completed)): ?>success<? elseif (!isset($course->cannot_take) && !($taken_300 >= 2 && $taken_100 >= 2)): ?>info<? endif; ?>">
 						<td><?= $course->school ?>:<?= $course->course ?></td>
 						<td><?= $course->credits ?></td>
 						<td>
