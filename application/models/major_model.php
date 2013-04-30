@@ -31,6 +31,7 @@ class Major_model extends CI_Model
 		$this->db->where('major_id', $id)
 			->or_where('major_id', 11)
 			->or_where('major_id', 12)
+			->or_where('major_id', 13)
 			->join('courses', 'major_courses.course_id = courses.id');
 
 		$query = $this->db->get('major_courses');
@@ -43,7 +44,7 @@ class Major_model extends CI_Model
 		$credits = 0;
 		foreach ($this->get_courses($id) as $course)
 		{
-			if ($course->major_id == '12')
+			if ($course->major_id == '12' || $course->major_id == '13')
 				continue;
 
 			if (!empty($course->type) && $course->type != 'MAJOR')
@@ -54,6 +55,7 @@ class Major_model extends CI_Model
 
 		$credits += 12; //humanities;
 		$credits += 3; //capstone
+		$credits += 3; // sme
 
 		if ($id == 1)
 			$credits += 12; //electives

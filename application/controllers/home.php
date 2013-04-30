@@ -75,7 +75,7 @@ class Home extends Main_Controller
 			{
 				if (isset($course->type) && $course->type == 'CAP')
 					$major_grouped_courses[1000][] = $course;
-				else if (isset($course->type) && $course->type != 'MAJOR')
+				else if (isset($course->type) && $course->type != 'MAJOR' && $course->type != 'SME')
 					$major_grouped_courses[999][] = $course;
 				else
 				{
@@ -94,6 +94,9 @@ class Home extends Main_Controller
 
 			$humanities_courses = $major_grouped_courses[12];
 			unset($major_grouped_courses[12]);
+
+			$sme_courses = $major_grouped_courses[13];
+			unset($major_grouped_courses[13]);
 
 			$humanities_300_taken = 0;
 			$humanities_100_taken = 0;
@@ -154,6 +157,21 @@ class Home extends Main_Controller
 			$this->load->view('capstone', array(
 				'courses' => $capstone_courses,
 				'finished' => $capstone_taken
+			));
+
+			$sme_taken = false;
+			foreach ($sme_courses as $course)
+			{
+				if (isset($course->completed) && $course->completed)
+				{
+					$sme_taken = true;
+					break;
+				}
+			}
+
+			$this->load->view('sme', array(
+				'courses' => $sme_courses,
+				'finished' => $sme_taken
 			));
 		}
 
