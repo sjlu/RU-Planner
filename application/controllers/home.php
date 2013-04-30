@@ -70,8 +70,17 @@ class Home extends Main_Controller
 					$returned_courses[] = $course;
 			}
 
+			$major_grouped_courses = array();
+			foreach ($returned_courses as $course)
+			{
+				if (!isset($major_grouped_courses[$course->major_id]))
+					$major_grouped_courses[$course->major_id] = array();
+
+				$major_grouped_courses[$course->major_id][] = $course;
+			}
+
 			$this->load->view('home', array(
-				'major_courses' => $returned_courses,
+				'major_courses' => $major_grouped_courses,
 				'major_credits' => $this->majors->credits($user->major),
 				'user_credits' => $this->users->credits($user->id)
 			));	

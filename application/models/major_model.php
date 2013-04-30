@@ -30,6 +30,7 @@ class Major_model extends CI_Model
 	{
 		$this->db->where('major_id', $id)
 			->or_where('major_id', 11)
+			->or_where('major_id', 12)
 			->join('courses', 'major_courses.course_id = courses.id');
 
 		$query = $this->db->get('major_courses');
