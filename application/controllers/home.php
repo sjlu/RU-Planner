@@ -79,11 +79,33 @@ class Home extends Main_Controller
 				$major_grouped_courses[$course->major_id][] = $course;
 			}
 
+			$humanities_courses = $major_grouped_courses[12];
+			unset($major_grouped_courses[12]);
+
+			$humanities_300_taken = 0;
+			$humanities_100_taken = 0;
+			foreach ($humanities_courses as $course)
+			{
+				if (!isset($course->completed))
+					continue;
+
+				if ($course->course >= 300)
+					$humanities_300_taken++;
+				else
+					$humanities_100_taken++;
+			}
+
 			$this->load->view('home', array(
 				'major_courses' => $major_grouped_courses,
 				'major_credits' => $this->majors->credits($user->major),
 				'user_credits' => $this->users->credits($user->id)
-			));	
+			));
+
+			$this->load->view('humanities', array(
+				'taken_300' => $humanities_300_taken,
+				'taken_100' => $humanities_100_taken,
+				'courses' => $humanities_courses
+			));
 		}
 
 		$this->load->view('include/footer');

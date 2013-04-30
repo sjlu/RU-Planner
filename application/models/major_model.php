@@ -42,7 +42,12 @@ class Major_model extends CI_Model
 	{
 		$credits = 0;
 		foreach ($this->get_courses($id) as $course)
+		{
+			if ($course->major_id == '12')
+				continue;
+
 			$credits += $course->credits;
+		}
 
 		return $credits;
 	}

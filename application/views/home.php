@@ -14,7 +14,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<? foreach ($major_courses as $course_groups): ?>
+		<? foreach ($major_courses as $major_id => $course_groups): ?>
+			<h3>
+				<? if ($major_id == 1 || $major_id == 2): ?>
+				Major Requirements
+				<? elseif ($major_id == 11): ?>
+				General Engineering Requirements
+				<? elseif ($major_id == 12): ?>
+				Humanities Requirements
+				<? endif; ?>
+			</h3>
+			<h5>
+				<strong>All courses are required.</strong>
+			</h5>
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
