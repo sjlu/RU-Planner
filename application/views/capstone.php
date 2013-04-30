@@ -1,22 +1,13 @@
 <div class="container">
 	<div class="row">
 		<h3>
-			Humanities Requirements
+			Capstone
 		</h3>
 		<h5>
-			<? if ($taken_300 >= 2 && $taken_100 >= 2): ?>
-				Humanities Requirements Satisfied
+			<? if ($finished): ?>
+				Requirements completed
 			<? else: ?>
-				<? if ($taken_100 < 2): ?>
-					<strong><?= 2-$taken_100 ?></strong> <i>100 Level</i> courses remaining,
-				<? else: ?>
-					100 Level Requirements Completed,
-				<? endif; ?>
-				<? if ($taken_300 < 2): ?>
-					<strong><?= 2-$taken_300 ?></strong> <i>300 Level</i> courses remaining
-				<? else: ?>
-					300 Level Requirements Completed
-				<? endif; ?>
+				<strong>1</strong> Capstone course is required
 			<? endif; ?>
 		</h5>
 		<table class="table table-bordered table-striped">
@@ -30,7 +21,7 @@
 			</thead>
 			<tbody>
 				<? foreach($courses as $course): ?>
-					<tr <? if (!($taken_300 >= 2 && $taken_100 >= 2)): ?>class="<? if(isset($course->completed)): ?>success<? elseif (!isset($course->cannot_take)): ?>info<? endif; ?>"<? endif; ?>>
+					<tr class="<? if(isset($course->completed)): ?>success<? elseif (!isset($course->cannot_take) && !($finished)): ?>info<? endif; ?>">
 						<td><?= $course->school ?>:<?= $course->course ?></td>
 						<td><?= $course->credits ?></td>
 						<td>
@@ -48,7 +39,7 @@
 										<i class="icon-remove-sign"></i>
 									</a>
 								<? elseif (!isset($course->cannot_take)): ?>
-									<? if (!($taken_300 >= 2 && $taken_100 >= 2)): ?>
+									<? if (!($finished)): ?>
 										<a class="btn btn-success"
 											href="<?= site_url('home/complete_course/' . $course->id) ?>">
 											<i class="icon-ok-sign"></i>

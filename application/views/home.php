@@ -73,7 +73,7 @@
 </div>
 <script type="text/javascript">
 	$('.course').popover({
-		trigger: 'click',
+		trigger: 'hover',
 		placement: 'top'
 	});
 </script>

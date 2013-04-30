@@ -4,8 +4,8 @@
 	</div>
 	<form class="form-inline" method="POST" action="<?= base_url('home/choose_major') ?>">
 		<select name="major">
+			<option value="" selected>Select a major</option>	
 			<? foreach ($majors as $major): ?>
-				<option value="" selected>Select a major</option>
 				<option value="<?= $major->id ?>"><?= $major->name ?></option>
 			<? endforeach; ?>
 		</select>

@@ -70,14 +70,27 @@ class Home extends Main_Controller
 					$returned_courses[] = $course;
 			}
 
-			$major_grouped_courses = array();
+			$major_grouped_courses = array('999' => array());
 			foreach ($returned_courses as $course)
 			{
-				if (!isset($major_grouped_courses[$course->major_id]))
-					$major_grouped_courses[$course->major_id] = array();
+				if (isset($course->type) && $course->type == 'CAP')
+					$major_grouped_courses[1000][] = $course;
+				else if (isset($course->type) && $course->type != 'MAJOR')
+					$major_grouped_courses[999][] = $course;
+				else
+				{
+					if (!isset($major_grouped_courses[$course->major_id]))
+						$major_grouped_courses[$course->major_id] = array();
 
-				$major_grouped_courses[$course->major_id][] = $course;
+					$major_grouped_courses[$course->major_id][] = $course;
+				}
 			}
+
+			$capstone_courses = $major_grouped_courses[1000];
+			unset($major_grouped_courses[1000]);
+
+			$elective_courses = $major_grouped_courses[999];
+			unset($major_grouped_courses[999]);
 
 			$humanities_courses = $major_grouped_courses[12];
 			unset($major_grouped_courses[12]);
@@ -105,6 +118,42 @@ class Home extends Main_Controller
 				'taken_300' => $humanities_300_taken,
 				'taken_100' => $humanities_100_taken,
 				'courses' => $humanities_courses
+			));
+
+			$electives_taken = array();
+			foreach ($elective_courses as $course)
+			{
+				if (!isset($electives_taken[$course->type]))
+					$electives_taken[$course->type] = 0;
+
+				if (isset($course->completed) && $course->completed)
+					$electives_taken[$course->type]++;
+			}
+
+			if ($user->major == 1)
+				$this->load->view('ce_electives', array(
+					'courses' => $elective_courses,
+					'taken' => $electives_taken
+				));
+			else if ($user->major == 2)
+				$this->load->view('ee_electives', array(
+					'courses' => $elective_courses,
+					'taken' => $electives_taken
+				));
+
+			$capstone_taken = false;
+			foreach ($capstone_courses as $course)
+			{
+				if (isset($course->completed) && $course->completed)
+				{
+					$capstone_taken = true;
+					break;
+				}
+			}
+
+			$this->load->view('capstone', array(
+				'courses' => $capstone_courses,
+				'finished' => $capstone_taken
 			));
 		}
 

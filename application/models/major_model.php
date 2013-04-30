@@ -46,8 +46,19 @@ class Major_model extends CI_Model
 			if ($course->major_id == '12')
 				continue;
 
+			if (!empty($course->type) && $course->type != 'MAJOR')
+				continue;
+
 			$credits += $course->credits;
 		}
+
+		$credits += 12; //humanities;
+		$credits += 3; //capstone
+
+		if ($id == 1)
+			$credits += 12; //electives
+		else if ($id == 2)
+			$credits += 18;
 
 		return $credits;
 	}

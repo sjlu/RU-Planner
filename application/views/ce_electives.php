@@ -1,21 +1,26 @@
 <div class="container">
 	<div class="row">
 		<h3>
-			Humanities Requirements
+			Electives
 		</h3>
 		<h5>
-			<? if ($taken_300 >= 2 && $taken_100 >= 2): ?>
-				Humanities Requirements Satisfied
-			<? else: ?>
-				<? if ($taken_100 < 2): ?>
-					<strong><?= 2-$taken_100 ?></strong> <i>100 Level</i> courses remaining,
+			<? if (!$taken['TECH'] && !$taken['COMP']): ?>
+				<strong>4</strong> electives need to be taken, at least one in <i>Technical</i> and one in <i>Computer</i>
+			<? elseif ($taken['TECH'] && $taken['COMP']): ?>
+				<? if ($taken['TECH']+$taken['COMP'] >= 4): ?>
+					Requirements Completed
 				<? else: ?>
-					100 Level Requirements Completed,
+					<strong><?= 4-($taken['TECH']+$taken['COMP']) ?></strong> electives in any catgory need to be taken.
 				<? endif; ?>
-				<? if ($taken_300 < 2): ?>
-					<strong><?= 2-$taken_300 ?></strong> <i>300 Level</i> courses remaining
+			<? else: ?>
+				<? if ($taken['TECH']): ?>
+					You need to take at least <strong>one</strong> <i>Computer</i> elective
 				<? else: ?>
-					300 Level Requirements Completed
+					You need to take at least <strong>one</strong> <i>Technical</i> elective
+				<? endif; ?>
+
+				<? if ($taken['TECH']+$taken['COMP']+1 < 4): ?>
+					along with <strong><?= 4-($taken['TECH']+$taken['COMP']+1) ?></strong> <i>other</i> electives
 				<? endif; ?>
 			<? endif; ?>
 		</h5>
@@ -25,12 +30,13 @@
 					<th>Course</th>
 					<th>Credits</th>
 					<th>Name</th>
+					<th>Category</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				<? foreach($courses as $course): ?>
-					<tr <? if (!($taken_300 >= 2 && $taken_100 >= 2)): ?>class="<? if(isset($course->completed)): ?>success<? elseif (!isset($course->cannot_take)): ?>info<? endif; ?>"<? endif; ?>>
+					<tr class="<? if(isset($course->completed)): ?>success<? elseif (!isset($course->cannot_take) && !($taken['TECH']+$taken['COMP'] >= 4 && $taken['TECH'] && $taken['COMP'])): ?>info<? endif; ?>">
 						<td><?= $course->school ?>:<?= $course->course ?></td>
 						<td><?= $course->credits ?></td>
 						<td>
@@ -41,6 +47,15 @@
 							</span>
 						</td>
 						<td>
+							<? if ($course->type == 'CAP'): ?>
+								Capstone
+							<? elseif ($course->type == 'TECH'): ?>
+								Technical
+							<? elseif ($course->type == 'COMP'): ?>
+								Computer
+							<? endif; ?>
+						</td>
+						<td>
 							<center>
 								<? if(isset($course->completed)): ?>
 									<a class="btn btn-danger"
@@ -48,7 +63,7 @@
 										<i class="icon-remove-sign"></i>
 									</a>
 								<? elseif (!isset($course->cannot_take)): ?>
-									<? if (!($taken_300 >= 2 && $taken_100 >= 2)): ?>
+									<? if (!($taken['TECH']+$taken['COMP'] >= 4 && $taken['TECH'] && $taken['COMP'])): ?>
 										<a class="btn btn-success"
 											href="<?= site_url('home/complete_course/' . $course->id) ?>">
 											<i class="icon-ok-sign"></i>
