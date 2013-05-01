@@ -10939,6 +10939,11 @@ ul.icons li [class*=" icon-"] {
   color: #000;
 }
 
+#settings .well {
+  width: 480px;
+  margin: 0 auto;
+}
+
 body {
   padding: 15px;
 }
