@@ -10,6 +10,7 @@ class Home extends Main_Controller
 
 		$this->load->model('user_model', 'users');
 		$user = $this->users->get_user($this->_user());
+		$user_credits = $this->users->credits($user->id);
 
 		$this->load->model('major_model', 'majors');
 		if (empty($user->major))
@@ -43,9 +44,13 @@ class Home extends Main_Controller
 			$coreqs = $this->courses->get_prereqs($course_ids);
 
 			foreach ($coreqs as $course_id => $course)
+			{
 				foreach ($course as $prereq)
+				{
 					if (!isset($courses_taken[$prereq]))
 						$all_courses[$course_id]->cannot_take = true;
+				}
+			}
 
 			$grouped_courses = array(
 				'can_take' => array(),
@@ -55,6 +60,9 @@ class Home extends Main_Controller
 
 			foreach ($all_courses as $course)
 			{
+				if ($user_credits < 60 && $course->upper_only)
+					$course->cannot_take = true;
+
 				if (isset($course->completed) && $course->completed)
 					$grouped_courses['completed'][] = $course;
 				else if (isset($course->cannot_take) && $course->cannot_take)
@@ -114,7 +122,7 @@ class Home extends Main_Controller
 			$this->load->view('home', array(
 				'major_courses' => $major_grouped_courses,
 				'major_credits' => $this->majors->credits($user->major),
-				'user_credits' => $this->users->credits($user->id)
+				'user_credits' => $user_credits
 			));
 
 			$this->load->view('humanities', array(
