@@ -48,6 +48,10 @@
 						</td>
 						<td>
 							<center>
+								<a class="btn"
+									href="<?= site_url('comments/show/' . $course->id) ?>">
+									<i class="icon-comment"></i>
+								</a>
 								<? if(isset($course->completed)): ?>
 									<a class="btn btn-danger"
 										href="<?= site_url('home/remove_course/' . $course->id) ?>">
